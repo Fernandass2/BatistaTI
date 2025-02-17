@@ -2,7 +2,8 @@
 
 
 # BatistaTI
-Desenvolvimento de sistema desktop para gestão de ordem de serviço!
+Desenvolvimento de sistema desktop para gestão de ordem de serviços de uma assistência técnica de computadores e notebooks!
 
 # Autor
 Fernanda Batista
+ 
