@@ -1,0 +1,23 @@
+{
+  "name": "batistati",
+  "version": "1.0.0",
+  "description": "Desenvolvimento de sistema desktop para gestão de ordem de serviços de uma assistência técnica de computadores e notebooks!",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Fernandass2/BatistaTI.git"
+  },
+  "author": "Fernanda Batista",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Fernandass2/BatistaTI/issues"
+  },
+  "homepage": "https://github.com/Fernandass2/BatistaTI#readme",
+  "devDependencies": {
+    "electron": "^34.2.0"
+  }
+}
