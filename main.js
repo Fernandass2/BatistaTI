@@ -1,5 +1,5 @@
 console.log("Processo principal")
-const { app, BrowserWindow, nativeTheme } = require('electron')
+const { app, BrowserWindow, nativeTheme, Menu} = require('electron')
 
 // Janela Principal
 let win
@@ -14,12 +14,35 @@ const createWindow = () => {
         resizable: false
   })
 
+  // menu personalizado
+  Menu.setApplicationMenu(Menu.buildFromTemplate(template))
+
+
   win.loadFile('./src/views/index.html')
 }
 
-app.whenReady().then(() => {
-  createWindow()
-})
+//  Janeçla sobre
+function aboutWindow(){
+  nativeTheme.themeSource = 'light'
+// A linha abaixo obtém a janela principal
+  const main = BrowserWindow.getFocusedWindow()
+  let about 
+// Estabelecer uma relação hieráquica entre janelas
+  if (main) {
+    // Criar tabela sobre
+    about = new BrowserWindow({
+      width: 360,
+      height: 220,
+      autoHideMenuBar: true,
+      resizable: false,
+      minimizable: false,
+      parent: main,
+      modal: true
+    })
+  }
+  // Carregar o documento html na janela
+  about.loadFile('./src/views/sobre.html')
+}
 
 // Iniciar A APLICAÇÃO
 app.whenReady().then(() => {
@@ -37,3 +60,67 @@ app.whenReady().then(() => {
       app.quit()
     }
   })
+  //  Reduzir logs não criticos
+  app.commandLine.appendSwitch('log-level', '3')
+  //  Template do menu
+  const template = [
+    {
+      label: 'Cadastro',
+      submenu: [
+        {
+          label: 'Clientes'
+        },
+        {
+          label: 'OS'
+        },
+        {
+          type: 'separator'
+        },
+        {
+          label: 'Sair', 
+          click: () => app.quit(),
+          accelerator: 'Alt+F4'
+        }
+      ]
+    },
+    {
+      label: 'Relatórios'
+    },
+    {
+     label: 'Ferramentas',
+     submenu: [
+      {
+        label: 'aplicar zoom',
+        role: 'zoomIn'
+      },
+      {
+        label: 'Reduzir',
+        role: 'zoomOut'
+      },
+      {
+        label: 'Restaurar o zoom padrão',
+        role: 'resetZoom'
+      },
+      {
+        type: 'separator'
+      },
+      {
+        label: 'Recarregar',
+        role:  'reload'
+      },
+      {
+        label: 'Ferramentas do Desenvolvedor',
+        role: 'toggleDevTools'
+      }
+     ]
+    },
+    {
+      label: 'Ajuda',
+      submenu: [
+        {
+          label: 'Sobre',
+          click: () => aboutWindow()
+        }
+      ]
+    }
+  ] 
